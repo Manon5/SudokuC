@@ -3,6 +3,7 @@
 #include <stdlib.h>
 
 #define TAILLE 9
+
 typedef struct { //modifier les x et y si utilisation d'autres noms de variables
 int x; // no de ligne
 int y; // no de colonne
