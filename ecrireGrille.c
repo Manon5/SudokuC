@@ -9,7 +9,7 @@ void ecrireGrille(int *G[][]){
   for(i = 0, i < 9, i++){
     printf("| ");
     for(j = 0, j < 9, j++){
-      printf("%d ", G[i, j]);
+      printf("%d ", G[i][j]);
     }
     printf("|");
   }
