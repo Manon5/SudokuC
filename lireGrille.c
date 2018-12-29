@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <string.h>
 
+int G[9] [9]
+
 void lireGrille(){
 // module
     FILE* fichier = NULL;
