@@ -12,7 +12,7 @@ lireGrille(){
 
     {
 
-        // On peut lire et écrire dans le fichier
+        // Lecture du fichier
 
     }
 
@@ -20,7 +20,7 @@ lireGrille(){
 
     {
 
-        // On affiche un message d'erreur si on veut
+        // Erreur
 
         printf("Impossible d'ouvrir le fichier");
 
