@@ -9,8 +9,6 @@ void initJeu(int G[][]*){
   {
     for(j=0;j<9;j++)
     {
-      *C[i][j].nbc=0;
-      *C[i][j].tab=NULL;
       if(*G[i][j]=0)
       {
        c=0;
@@ -25,6 +23,11 @@ void initJeu(int G[][]*){
          c++;
         }
       }
+      else
+      {
+       *C[i][j].nbc=0;
+       *C[i][j].tab=NULL;
+      } 
     }
   }
  *NBO=a;
