@@ -21,7 +21,7 @@ int O[81];
 void lireGrille(int tab[], unsigned taille); //module de lecture du tableau G
 void ecrireGrille(); //module qui permet d'afficher le tableau G à l'écran
 void initJeu(); //module d'initialisation des tables C, O et de la variable NBO
-estCand(); //permet de savoir si un nombre est candidat ou non
+estCand(); //permet de savoir si un nombre est candidat(1) ou non(0)
 appartient(); //le nombre appartient-il aux nombres candidats?
 estCandUnique(); //le candidat est-il unique ou non?
 rechCaseUnique(); //cette case contient-elle un candidat unique?
