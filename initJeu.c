@@ -9,7 +9,7 @@ void initJeu(int G[][]*){
     for(j=0;j<9;j++)
     {
       C[i][j].nbc=0;
-     C[i][j].tab=NULL;
+      C[i][j].tab=NULL;
       if(*G[i][j]=0)
       {
        *O[c].x=i;
