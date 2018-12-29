@@ -10,7 +10,7 @@ void initJeu(int G[][]*)
   {
     for(j=0;j<9;j++)
     {
-      if(*G[i][j]=0)   \\détermine si la case est ouverte ou femré
+      if(*G[i][j]=0)   //détermine si la case est ouverte ou femré
       {
        c=0;
        *O[c].x=i;
@@ -18,7 +18,7 @@ void initJeu(int G[][]*)
        a++;
        for(b=1;b<10;b++)
        {
-        if(estCand()=1) \\paramètres a rejouter après que la fonction est faite et determine si b est un nombre candidat
+        if(estCand()=1) //paramètres a rejouter après que la fonction est faite et determine si b est un nombre candidat
         {
          *C[i][j].nbc++;
          *C[i][j].*tab[c]=b;
