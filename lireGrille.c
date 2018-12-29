@@ -29,6 +29,4 @@ void lireGrille(){
     }
 
 
-    return 0;
-
 }
