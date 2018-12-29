@@ -1,4 +1,9 @@
-#include stdio.h
+#include <stdio.h>
+
+int G[9] [9]
+int Cand C[9][9]
+int NBO
+int Case O[81]
 
 int main()
 {
