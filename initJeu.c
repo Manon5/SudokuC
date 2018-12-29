@@ -1,6 +1,6 @@
 #include <studio.h>
 
-void initJeu{
+void initJeu(int G[][]*){
  
  int i, j,c;
  c=0;
