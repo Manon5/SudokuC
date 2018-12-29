@@ -22,7 +22,7 @@ void lireGrille(){
 
     {
 
-        // Erreur
+        // Erreur dans le cas où le fichier n'existe pas
 
         printf("Impossible d'ouvrir le fichier");
 
