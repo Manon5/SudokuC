@@ -2,7 +2,7 @@
 
 void initJeu(int G[][]*)
 {
- 
+ //module
  int i, j,a,b,c;
  
  a=0;
