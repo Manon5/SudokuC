@@ -9,6 +9,9 @@ void initJeu(int G[][]*){
     for(j=0;j<9;j++)
     {
       if(*G[i][j]=0)
+      {
+       *O[c].x=i;
+       *O[c].y=j;
        c++;
     }
   }
