@@ -11,6 +11,9 @@ int nbc; // no de candidats
 int * tab; // table candidats
 } Cand;
 
+//aussis supprimer certaines fonctions si elles n'ont pas lieu d'être ici + ajouter les variables dedans 
+
+
 void lireGrille(); //module de lecture du tableau G
 void ecrireGrille(); //module qui permet d'afficher le tableau G à l'écran
 void initJeu(); //module d'initialisation des tables C, O et de la variable NBO
