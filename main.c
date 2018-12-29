@@ -11,6 +11,10 @@ int nbc; // no de candidats
 int * tab; // table candidats
 } Cand;
 
+int NBO;
+int C[i][j]={};
+int O[81];
+
 //aussis supprimer certaines fonctions si elles n'ont pas lieu d'être ici + ajouter les variables dedans 
 
 
