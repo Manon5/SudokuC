@@ -2,7 +2,7 @@
 #include <string.h>
 
 void lireGrille(){
-
+// module
     FILE* fichier = NULL;
 
     fichier = fopen("grille_test.txt", "r");
