@@ -1,6 +1,6 @@
 #include <studio.h>
 
-void intJeu(G[][]*, C[][]*, {
+void intJeu{
  
  int i, j;
   for(i=0;i<9;i++)
