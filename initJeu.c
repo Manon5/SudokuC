@@ -10,8 +10,9 @@ void initJeu(int G[][]*)
   {
     for(j=0;j<9;j++)
     {
-      if(*G[i][j]=0)   //détermine si la case est ouverte ou femré
+      if(*G[i][j]=0)   //détermine si la case est ouverte ou fermee
       {
+       // On remplit la table O (case ouverte/fermee)
        c=0;
        *O[c].x=i;
        *O[c].y=j;
@@ -20,6 +21,7 @@ void initJeu(int G[][]*)
        {
         if(estCand()=1) //paramètres a rejouter après que la fonction est faite et determine si b est un nombre candidat
         {
+         // On remplit la table C (liste des candidats)
          *C[i][j].nbc++;
          *C[i][j].*tab[c]=b;
          c++;
@@ -33,5 +35,5 @@ void initJeu(int G[][]*)
       } 
     }
   }
- *NBO=a;
+ *NBO=a; // Compteur de cases ouvertes
 }
