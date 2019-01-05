@@ -17,3 +17,4 @@ void ecrireGrille(int *G[][]){
   printf("------------------------------\n");
   
 }
+
