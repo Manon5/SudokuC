@@ -41,8 +41,11 @@ int estVoisine(int cA, int lA, int cB, int lB){
     res = 1; // la case est voisine
   }
   // on teste si A et B sont dans la meme zone
-
-
+  else if(quelleZone(cA,lA) == quelleZone(cB, lB){
+    res = 1;
+  }
+          
+          
   // on retourne le resultat
   return res;
 
@@ -51,4 +54,12 @@ int estVoisine(int cA, int lA, int cB, int lB){
 int estCand(){ 
   // determine si un nombre est candidat pour une case donnee
 
+  
+  int i, j; // On parcourt toute la grille
+  
+  for(i = 0, i < 9, i++){
+    for(j = 0, j < 9, j++){
+      
+    }
+  }
 }
