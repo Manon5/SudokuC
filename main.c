@@ -18,11 +18,12 @@ int G[TAILLE][TAILLE];
 Case O[81];
 Cand C[9][9];
 int NBO;
-int lireGrille();
-void ecrireGrille()
-
-
-
+void lireGrille();
+void ecrireGrille();
+void initJeu(int);
+int quelleZone(int, int);
+int estVoisine(int, int, int, int, int);
+int estCand(int, int, int, int);
 
 int main()
 {
