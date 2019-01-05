@@ -51,15 +51,23 @@ int estVoisine(int cA, int lA, int cB, int lB){
 
 }
 
-int estCand(){ 
-  // determine si un nombre est candidat pour une case donnee
+int estCand(int col, int lig, int *G[][], int nb){ 
+  // determine si un nombre nb est candidat pour une case donnee
 
   
   int i, j; // On parcourt toute la grille
+  int res = 1; // on initialise à VRAI
   
   for(i = 0, i < 9, i++){
     for(j = 0, j < 9, j++){
-      
+      if(estVoisine(i, j, col, lig){
+        // Les cases sont voisines : on teste si la case vaut nb
+        if(G[i][j] == nb){
+          // Meme valeur que nb : nb n'est pas candidat
+          res = 0;
+      }
     }
   }
+         
+  
 }
