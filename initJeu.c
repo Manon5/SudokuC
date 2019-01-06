@@ -1,6 +1,6 @@
 #include <studio.h>
 
-void initJeu(int G[][]*)
+void initJeu(int *G[][])
 {
  //module
  int i, j,a,b,c;
@@ -19,7 +19,7 @@ void initJeu(int G[][]*)
        a++;
        for(b=1;b<10;b++)
        {
-        if(estCand()=1) //paramètres a rejouter après que la fonction est faite et determine si b est un nombre candidat
+        if(estCand(j,i,*G[][],b)=1) //determine si b est un nombre candidat
         {
          // On remplit la table C (liste des candidats)
          *C[i][j].nbc++;
