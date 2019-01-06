@@ -68,6 +68,6 @@ int estCand(int col, int lig, int *G[][], int nb){
       }
     }
   }
-         
+  return res;       
   
 }
