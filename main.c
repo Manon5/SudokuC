@@ -40,6 +40,4 @@ int main()
 {
 void lireGrille();
 void ecrireGrille();
-  //ajoputer de nouvelles fonctions dedans si il y en manque
-  //ajouter les variables manquantes
 }
