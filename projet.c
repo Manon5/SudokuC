@@ -227,4 +227,7 @@ Case rechCaseUnique(Cand C[][9]){
 }
          
          
+//fonction permettant de supprimer 
          
+         
+ 
