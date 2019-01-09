@@ -2,7 +2,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-//définition de la taille des tableaux (9x9)
+//définition de la taille des grilles (9x9)
 #define TAILLE 9
 
 //définition des types structures
