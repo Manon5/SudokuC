@@ -54,6 +54,7 @@ void lireGrille(int *G[][]){
 
 }
 
+
 void ecrireGrille(int *G[][]){
 
   int i, j;
@@ -71,6 +72,7 @@ void ecrireGrille(int *G[][]){
   printf("------------------------------\n");
   
 }
+
 
 void initJeu(int *G[][])
 {
@@ -110,6 +112,7 @@ void initJeu(int *G[][])
  *NBO=a; // Compteur de cases ouvertes
 }
 
+
 int quelleZone(int colonne, int ligne){
   // determine a quelle zone appartient une case (utilise dans estVoisine)
   int zone = 0;
@@ -134,6 +137,7 @@ int quelleZone(int colonne, int ligne){
   return zone;
   
 }
+
 
 int estVoisine(int cA, int lA, int cB, int lB){  
   // determine si deux cases sont voisines (utilise dans estCand)
@@ -160,6 +164,7 @@ int estVoisine(int cA, int lA, int cB, int lB){
 
 }
 
+          
 int estCand(int col, int lig, int *G[][], int nb){ 
   // determine si un nombre nb est candidat pour une case donnee
 
@@ -181,6 +186,7 @@ int estCand(int col, int lig, int *G[][], int nb){
   
 }
          
+         
 int appartient(Cand C[][], int x, int y, int nb){
   int i;
   for(i=0;i<C[x][y].nbc;i++){
@@ -189,9 +195,12 @@ int appartient(Cand C[][], int x, int y, int nb){
   }
   return(0);
 }
+       
          
 int estCandUnique(Cand C[][9], int x, int y, int nb){
     if((C[x][y].nbc=!1)||(C[x][y].tab[0]=!nb))
     return(0);
     return(1);
 }
+
+         
