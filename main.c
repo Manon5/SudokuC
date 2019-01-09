@@ -2,6 +2,7 @@
 #include <string.h>
 #include <stdlib.h>
 
+//définition de la taille des tableaux
 #define TAILLE 9
 
 //définition des types structures
@@ -16,13 +17,14 @@ int * tab; // table candidats
 } Cand;
 
 //initialisation des fonctions, variables et tableaux
+int tab[9]
 int G[TAILLE][TAILLE];
 Case O[81];
 Cand C[9][9];
 int NBO;
 void lireGrille();
 void ecrireGrille();
-void initJeu(int);
+void initJeu(int*);
 int quelleZone(int, int);
 int estVoisine(int, int, int, int, int);
 int estCand(int, int, int, int);
