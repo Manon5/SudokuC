@@ -205,7 +205,7 @@ int estCandUnique(Cand C[][9], int x, int y, int nb){
 
          
 Case rechCaseUnique(Cand C[][9]){
-  Case coor; 
+  Case coor; //création d'une structure pour les coordonnées des cases
   int i, j, n;
   coor.x=NULL;
   coor.y=NULL;
@@ -228,11 +228,25 @@ Case rechCaseUnique(Cand C[][9]){
          
          
 //fonction permettant de supprimer le candidat des cases adjacentes à la case remplie par ce dernier (utilisée dans la fonction fermerCase)
-         
+ void suppr(Cand *C[][9], int x, int y, int nb ){
+  int i,t;
+  for(i=0;i<(*C)[x][y].nbc;i++){
+    if((*C)[x][y].tab[i]==nb){
+      (*C)[x][y].tab[i]=NULL;
+      t=i;
+      break;
+    }
+  }
+  for(i=t;i<(*C)[x][y].nbc-1;i++){
+    (*C)[x][y].tab[i]=(*C)[x][y].tab[i+1];
+  }
+  (*C)[x][y].nbc--;
+}  
+               
          
  void fermerCase(int *G[][9], Cand *C[][9], Case coor,int nb){
   int i, part, j;
-  Case coor2;
+  Case coor2; //autre structure de coordonnées de cases
   coor2.x=0;
   coor2.y=0;
   *G[coor.x][coor.y]=nb;
@@ -240,7 +254,8 @@ Case rechCaseUnique(Cand C[][9]){
   (*C)[coor.x][coor.y].tab=NULL;
   for(i=0;i<9;i++){
     if(appartient(C[9][9], i, coor.y, nb)==1){
-      suppr(*C[9][9], i, coor.y, nb);  //fonction a faire : supprime la case du nombre dans le tableau et décale vers la droite c'elle après et fait nbc-1
+      suppr(*C[9][9], i, coor.y, nb);  /*fonction a faire : supprime la case du nombre dans le tableau et décale vers la 
+                                        droite c'elle après et fait nbc-1*/
     }
   }
   for(i=0;i<9;i++){
