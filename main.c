@@ -25,8 +25,8 @@ int NBO;
 void lireGrille();
 void ecrireGrille();
 void initJeu(int*);
-int quelleZone(int, int);
-int estVoisine(int, int, int, int, int);
+int quelleZone(int, int); //fonction utilisée dans estVoisine
+int estVoisine(int, int, int, int, int); //fonction utilisée dans estCand 
 int estCand(int, int, int, int);
 
 int main()
