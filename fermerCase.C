@@ -35,3 +35,4 @@ void fermerCase(int *G[][9], Cand *C[][9], Case coor,int nb){
       }
     }
   }
+}
