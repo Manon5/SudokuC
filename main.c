@@ -29,7 +29,7 @@ int quelleZone(int, int); //fonction utilisée dans estVoisine
 int estVoisine(int, int, int, int, int); //fonction utilisée dans estCand 
 int estCand(int, int, int, int);
 int appartient(Cand, int, int, int);
-int estCandUnique();
+int estCandUnique(Cand, int, int, int);
 int rechCaseUnique();
 int fermerCase();
 int fermerGrille();
