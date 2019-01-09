@@ -31,6 +31,7 @@ int estCand(int, int, int, int);
 int appartient(Cand, int, int, int);
 int estCandUnique(Cand, int, int, int);
 Case rechCaseUnique(Cand);
+void suppr(); //module utilisé dans le module fermerCase
 void fermerCase();
 void fermerGrille();
 int ecrireCand();
