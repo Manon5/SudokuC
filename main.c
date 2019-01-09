@@ -31,7 +31,7 @@ int estCand(int, int, int, int);
 int appartient(Cand, int, int, int);
 int estCandUnique(Cand, int, int, int);
 Case rechCaseUnique(Cand);
-int fermerCase();
+void fermerCase();
 int fermerGrille();
 int ecrireCand();
 
