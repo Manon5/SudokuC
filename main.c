@@ -4,6 +4,7 @@
 
 #define TAILLE 9
 
+//définition des types structures
 typedef struct { //modifier les x et y si utilisation d'autres noms de variables
 int x; // no de ligne
 int y; // no de colonne
@@ -14,6 +15,7 @@ int nbc; // no de candidats
 int * tab; // table candidats
 } Cand;
 
+//initialisation des fonctions, variables et tableaux
 int G[TAILLE][TAILLE];
 Case O[81];
 Cand C[9][9];
