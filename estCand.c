@@ -1,3 +1,5 @@
+// fonctions terminées et vérifiées : tout fonctionne à priori
+
 #include <stdio.h>
 
 int quelleZone(int colonne, int ligne){
