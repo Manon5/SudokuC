@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include "types.h"
 
 //définition de la taille des grilles (9x9)
 #define TAILLE 9
