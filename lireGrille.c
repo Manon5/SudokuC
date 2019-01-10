@@ -1,11 +1,16 @@
-void lireGrille(int *G[][]){
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+void lireGrille(int G[9][9]){
 // module
 
     // On initialise à 0
     int i, j, l, c, v;
-    for(i = 0, i < 9, i++){
-        for(j = 0, j < 9, j++){
-            G[i, j] = 0;
+    char tab[20];
+    for(i = 0; i < 9; i++){
+        for(j = 0; j < 9; j++){
+            G[i][j] = 0;
         }
     }
 
@@ -13,12 +18,13 @@ void lireGrille(int *G[][]){
     FILE* fichier = NULL;
     fichier = fopen("grille_test.txt", "r");
 
+
     if (fichier != NULL){
         // Lecture du fichier
-        while(fgetc != EOF){
-          fscanf(fichier, "%d %d %d", &l, &c, &v);
+        while(fgets(tab, 20, fichier) != NULL){
+          sscanf(tab, "%d %d %d", &l, &c, &v);
           G[l][c] = v;
-        }        
+        }
     }
 
     else{
