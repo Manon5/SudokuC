@@ -1,3 +1,5 @@
+// fonction pas terminée : ne fonctionne pas, surement à cause des types
+
 #include <studio.h>
 
 void initJeu(int *G[][])
