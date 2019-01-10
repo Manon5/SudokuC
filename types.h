@@ -9,5 +9,5 @@ int y; // no de colonne
 
 typedef struct {
 int nbc; // no de candidats
-int *tab; // table candidats
+int tab[9]; // table candidats
 } Cand;
