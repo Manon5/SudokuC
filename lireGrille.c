@@ -15,7 +15,7 @@ void lireGrille(int *G[][]){
 
     if (fichier != NULL){
         // Lecture du fichier
-        while(getchar() != EOF){
+        while(fgetc != EOF){
           fscanf(fichier, "%d %d %d", &l, &c, &v);
           G[l][c] = v;
         }        
