@@ -18,7 +18,7 @@ void lireGrille(int G[9][9]){
 
     // On lit dans le fichier texte pour remplir la grille
     FILE* fichier = NULL;
-    fichier = fopen("grille_tes.txt", "r");
+    fichier = fopen("grille_test.txt", "r");
 
 
     if (fichier != NULL){
