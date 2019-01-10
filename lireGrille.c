@@ -18,7 +18,7 @@ void lireGrille(int G[9][9]){
 
     // On lit dans le fichier texte pour remplir la grille
     FILE* fichier = NULL;
-    fichier = fopen("grille_test.txt", "r");
+    fichier = fopen("grille_tes.txt", "r");
 
 
     if (fichier != NULL){
@@ -32,7 +32,7 @@ void lireGrille(int G[9][9]){
     else{
         // Erreur dans le cas où le fichier n'existe pas
 
-        printf("Impossible d'ouvrir le fichier");
+        printf("Impossible d'ouvrir le fichier\n");
     }
 
 
