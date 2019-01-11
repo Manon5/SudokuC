@@ -1,4 +1,5 @@
 
+// manque encore a retirer les coordoner de O et a décaler les coordonnées qui sont à droite de la case supprimé 
 void fermerCase(int *G[][9], Cand *C[][9], Case coor,int nb){
   int i, part, j;
   Case coor2;
