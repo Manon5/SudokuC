@@ -2,7 +2,7 @@
 
 #include <studio.h>
 
-void initJeu(int *G[][])
+void initJeu(int *G[][9])
 {
  //module
  int i, j,a,b,c;
@@ -16,24 +16,24 @@ void initJeu(int *G[][])
       {
        // On remplit la table O (case ouverte/fermee)
        c=0;
-       *O[c].x=i;
-       *O[c].y=j;
+       (*O)[c].x=i;
+       (*O)[c].y=j;
        a++;
        for(b=1;b<10;b++)
        {
         if(estCand(j,i,*G[][],b)=1) //determine si b est un nombre candidat
         {
          // On remplit la table C (liste des candidats)
-         *C[i][j].nbc++;
-         *C[i][j].*tab[c]=b;
+         (*C)[i][j].nbc++;
+         (*C)[i][j].*tab[c]=b;
          c++;
         }
        }
       }
       else
       {
-       *C[i][j].nbc=0;
-       *C[i][j].tab=NULL;
+       (*C)[i][j].nbc=0;
+       (*C)[i][j].tab=NULL;
       } 
     }
   }
