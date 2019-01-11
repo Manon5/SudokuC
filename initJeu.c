@@ -16,7 +16,7 @@ void initJeu(int *G[][9])
       {
        // On remplit la table O (case ouverte/fermee)
        c=0;
-       (*O)[c].x=i;
+       (*O)[c].x=i; // O est de type case, si la cas est ouverte, O enregistre les coordonnée de la case
        (*O)[c].y=j;
        a++;
        for(b=1;b<10;b++)
