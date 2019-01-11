@@ -2,7 +2,7 @@
 
 #include <studio.h>
 
-void initJeu(int G[][9])
+void initJeu(int G[][9], Cand *C[][9], int *NBO, Case *O[])
 {
  //module
  int i, j,a,b,c;
