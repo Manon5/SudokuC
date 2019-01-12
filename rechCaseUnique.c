@@ -1,3 +1,4 @@
+// a changer en utilisant O
 Case rechCaseUnique(Cand C[][9]){
   Case coor;
   int i, j, n;
