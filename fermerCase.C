@@ -1,6 +1,5 @@
 
-// manque encore a retirer les coordoner de O et a décaler les coordonnées qui sont à droite de la case supprimé 
-void fermerCase(int G[9][9], Cand C[9][9], Case coor,int nb){
+void fermerCase(int G[9][9], Cand C[9][9], Case coor,int nb){ // coor c'est une case du tableau de O 
   int i, part, j;
   G[coor.x][coor.y]=nb;
   C[coor.x][coor.y].nbc=0;
