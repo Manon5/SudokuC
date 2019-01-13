@@ -1,4 +1,4 @@
-int fermerGrille(G[9][9], Cand C[9][9], Case O[81], *NBO)
+int fermerGrille(int G[9][9], Cand C[9][9], Case O[81], int *NBO)
 {
     int fin, i, j, k, br; //dif permet de savoir si la grille est finie
     fin=0;
