@@ -2,9 +2,6 @@
 // manque encore a retirer les coordoner de O et a décaler les coordonnées qui sont à droite de la case supprimé 
 void fermerCase(int G[9][9], Cand C[9][9], Case coor,int nb){
   int i, part, j;
-  Case coor2;
-  coor2.x=0;
-  coor2.y=0;
   G[coor.x][coor.y]=nb;
   C[coor.x][coor.y].nbc=0;
   C[coor.x][coor.y].tab=NULL;
