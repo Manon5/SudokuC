@@ -12,7 +12,7 @@ int fermerGrille(int G[9][9], Cand C[9][9], Case O[81], int *NBO)
                 if (estCandUnique(C[9][9], O[i].x, O[i].y, j)==1)
                 {
                     fermerCase(G[9][9], C[9][9], O[i], j);
-                    for(k=i;k<*NBO+1;i++)
+                    for(k=i;k<*NBO;i++)
                     {
                         O[k]=O[k+1]; //déplace les élément de O 
                     }
