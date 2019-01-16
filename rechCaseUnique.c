@@ -1,22 +1,17 @@
-// a changer en utilisant O
-Case rechCaseUnique(Cand C[][9]){
-  Case coor;
-  int i, j, n;
-  coor.x=NULL;
-  coor.y=NULL;
-  for(i=0;i<9;i++){
-    for(j=0;j<9;j++){
-      if (C[i][j].nbc==1){
-        for(n=1;n<10;n++){
-          if(estCandUnique(C[9][9],i,j,n)==1){
-            coor.x=i;
-            coor.y=j;
-            return(coor);
+Case rechCaseUnique(Cand C[9][9],Case O[81],int NBO){
+  Case res;
+  int i, k;
+  res.x= NULL;
+  res.y= NULL;
+  for(i=0;i<NBO;i++){
+    if(C[O[i].x][O[i].y].nbc==1){  
+        for(k=1;k<10;k++){
+          if(estCandUnique(C,O[i],k)==1){
+            return O[i];
           }
         }
-      }
-    }
+    } 
   }
 
-  return(coor);
+  return res;
 }
