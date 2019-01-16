@@ -1,34 +1,13 @@
+void fermerCase(int G[9][9], Cand C[9][9], Case ca){ 
+  // On ferme la case
+  G[ca.x, ca.y] = C[ca.x, ca.y].tab[0];
 
-void fermerCase(int G[9][9], Cand C[9][9], Case coor,int nb){ // coor c'est une case du tableau de O 
-  int i, part, j;
-  G[coor.x][coor.y]=nb;
-  C[coor.x][coor.y].nbc=0;
-  C[coor.x][coor.y].tab=NULL;
-  for(i=0;i<9;i++){
-    if(appartient(C[9][9], i, coor.y, nb)==1){
-      suppr(C[9][9], i, coor.y, nb);  //fonction a faire : supprime la case du nombre dans le tableau et décale vers la droite c'elle après et fait nbc-1
-    }
-  }
-  for(i=0;i<9;i++){
-    if(appartient(C[9][9], coor.x, i, nb)==1){
-      suppr(C[9][9], coor.x, i, nb);
-    }
-  }
-  part=quelleZone(coor.y, coor.x);
-  switch(part){
-    case 2:coor.y+=3; break;
-    case 3:coor.y+=6; break;
-    case 4:coor.x+=3; break;
-    case 5:coor.y+=3;coor.x+=3; break;
-    case 6:coor.y+=6;coor.x+=3; break;
-    case 7:coor.x+=6; break;
-    case 8:coor.y+=3;coor.x+=6; break;
-    case 9:coor.y+=6;coor.x+=6; break;
-  }
-  for (i=0;i<3;i++){
-    for(j=0;j<3;j++){
-      if(appartient(C[9][9], coor.x + i, coor.y + j, nb)==1){
-        suppr(C[9][9], coor.x + i, coor.y + j, nb);
+  // On retire le candidat des cases voisines
+  int i, j;
+  for (i = 0; i < 9; i++) { // on parcourt le tableau
+    for (j = 0; j < 9; j++) {
+      if(C[i, j] == 0 && estVoisine(ca.x, ca.y, i, j)){ // si la case est voisine et ouverte
+        suppr(C, ca.x, ca.y, C[ca.x, ca.y].tab[0]); // on supprime le candidat de la liste
       }
     }
   }
