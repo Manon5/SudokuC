@@ -33,17 +33,16 @@ int estCandUnique(Cand[9][9], int, int, int);
 Case rechCaseUnique(Cand[9][9],Case[81], int);
 void suppr(Cand[9][9], int, int, int); //module utilisé dans le module fermerCase
 void fermerCase(int[9][9], Cand[9][9], Case, int);
-int fermerGrille(int[9][9], Cand[9][9], Case[81], int*);
+int fermerGrille(int[9][9], Cand[9][9], Case[81], int);
 int ecrireCand();//pas oublier le ecrire cand dans fermergrille
 
 int main()
 {
-  int fac, NBO,i;
+  int fac, NBO;
 lireGrille(G);
 ecrireGrille(G);//a completer et faire plus dans les autre fonctions
 initJeu(G,C,O,&NBO);
-fac=fermerGrille(G,C,O,&NBO);
-printf("Voici la grille finale\n");
+fac=fermerGrille(G,C,O,NBO);
 ecrireGrille(G);
 if(fac==1){
 printf("La grille étant difficle, voici les condidats possibles pour les cases restantes\n");
@@ -310,7 +309,7 @@ void fermerCase(int G[9][9], Cand C[9][9], Case coor,int nb){ // coor c'est une 
   }
 }
 
-int fermerGrille(int G[9][9], Cand C[9][9], Case O[81], int *NBO)
+int fermerGrille(int G[9][9], Cand C[9][9], Case O[81], int NBO)
 {
     int fin, i, k, f, nb,ga; //dif permet de savoir si la grille est finie
     Case coor;
@@ -318,31 +317,41 @@ int fermerGrille(int G[9][9], Cand C[9][9], Case O[81], int *NBO)
     while(fin==0)
     {
         f=0;
-        coor=rechCaseUnique(C,G,*NBO);
-        if(coor.x=!NULL){  
-           nb=C[coor.x][coor.y].tab[0];
+        coor=rechCaseUnique(C,G,NBO);
+        if(coor.x=!NULL)
+            {  
+            nb=C[coor.x][coor.y].tab[0];
             fermerCase(G, C, coor, nb);
-            for(i=0;i<=*NBO;i++)
+            for(i=0;i<=NBO;i++)
             {
                 if((coor.x==O[i].x)&&(coor.y==O[i].y))
                 {
                     break;
                 }
             }
-            for(k=i;k<*NBO-1;k++)
+            for(k=i;k<NBO-1;k++)
             {
                 O[k]=O[k+1]; //déplace les élément de O
             }
-            *NBO--;
+            NBO--;
             printf("Elimination des candidats uniques...\n la case (%d,%d)est fermee avec le chiffre %d\n",O[i].x,O[i].y,nb);
             ecrireGrille(G);
-            printf("Voici les candidats des %d cases ouvertes de la grille :",*NBO);
+            printf("Voici les candidats des %d cases ouvertes de la grille :",NBO);
             //ecrire cand
             f=1;
+            if(NBO==0)
+                {
+                f=0;
+                }
+            }
+        if(f=!1) 
+            {    
+           fin=1; // si il n'y a pas eu de case remplit, la grille est finie
+            }
+    if(NBO>0)
+        {
+        return(1); //dit que la grille est difficile
         }
-    if(f=!1)    
-        fin=1; // si il n'y a pas eu de case remplit, la grille est finie
-    }
-    if(*NBO>0) return(1); //dit que la grille est difficile
     else return(0); //dit que la grille est facile
+}
 }
