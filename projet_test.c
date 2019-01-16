@@ -30,7 +30,7 @@ int estVoisine(int, int, int, int); //fonction utilisée dans estCand
 int estCand(int, int, int[9][9], int);
 int appartient(Cand[9][9], int, int, int);;
 int estCandUnique(Cand[9][9], int, int, int);
-Case rechCaseUnique(Cand[9][9]);
+Case rechCaseUnique(Cand[9][9],Case[81], int*);
 void suppr(Cand[9][9], int, int, int); //module utilisé dans le module fermerCase
 void fermerCase(int[9][9], Cand[9][9], Case, int);
 int fermerGrille(int[9][9], Cand[9][9], Case[81], int*);
@@ -38,12 +38,14 @@ int ecrireCand();//pas oublier le ecrire cand dans fermergrille
 
 int main()
 {
-  int fac, NBO;
+  int fac, NBO,i;
 lireGrille(G);
 ecrireGrille(G);//a completer et faire plus dans les autre fonctions
 initJeu(G,C,O,&NBO);
+for(i=0;i<NBO;i++)
+    printf("%d,%d\n",O[i].x,O[i].y);
 fac=fermerGrille(G,C,O,&NBO);
-printf("Voici la grille finale\n");
+printf("Voici la grille finale\n",NBO);
 ecrireGrille(G);
 if(fac==1){
 printf("La grille étant difficle, voici les condidats possibles pour les cases restantes\n");
@@ -116,8 +118,6 @@ void initJeu(int G[9][9], Cand C[9][9], Case O[81],int *NBO)
  //module
  int i, j,w,b,c,r;
  w=0;
- O=calloc(81, sizeof(Case));
- C=calloc(81, sizeof(Cand));
   for(i=0;i<9;i++)
   {
     for(j=0;j<9;j++)
@@ -140,6 +140,7 @@ void initJeu(int G[9][9], Cand C[9][9], Case O[81],int *NBO)
          c++;
        }
         }
+          
       }
       else
       {
@@ -148,7 +149,6 @@ void initJeu(int G[9][9], Cand C[9][9], Case O[81],int *NBO)
      }
     }
   }
-  printf("w = %d\n", w);
  *NBO=w; // Compteur de cases ouvertes
 }
 
@@ -211,7 +211,7 @@ int estCand(int col, int lig, int G[9][9], int nb){
 
   for(i = 0; i < 9; i++){
     for(j = 0; j < 9; j++){
-      if(estVoisine(i, j, col, lig)){
+      if(estVoisine(j, i, col, lig)){
         // Les cases sont voisines : on teste si la case vaut nb
         if(G[i][j] == nb){
           // Meme valeur que nb : nb n'est pas candidat
@@ -235,27 +235,27 @@ int appartient(Cand C[9][9], int x, int y, int nb){
 int estCandUnique(Cand C[9][9], int x, int y, int nb){
     if((C[x][y].nbc=!1)||(C[x][y].tab[0]=!nb))
     return(0);
-    return(1);
+    else return(1);
 }
 
-// a changer en utilisant O
-Case rechCaseUnique(Cand C[9][9]){
+Case rechCaseUnique(Cand C[9][9],Case O[81],int *NBO){
   Case coor;
-  int i, j, n;
+  int i, n;
   coor.x=NULL;
   coor.y=NULL;
-  for(i=0;i<9;i++){
-    for(j=0;j<9;j++){
-      if (C[i][j].nbc==1){
+  for(i=0;i<NBO;i++)
+    {
+    if(C[O[i].x][O[i].y].nbc+1==1)
+        {
         for(n=1;n<10;n++){
-          if(estCandUnique(C,i,j,n)==1){
-            coor.x=i;
-            coor.y=j;
+          if(estCandUnique(C,O[i].x,O[i].y,n)==1){
+            coor.x=O[i].x;
+            coor.y=O[i].y;
             return(coor);
           }
         }
-      }
-    }
+      
+    } 
   }
 
   return(coor);
@@ -314,13 +314,13 @@ void fermerCase(int G[9][9], Cand C[9][9], Case coor,int nb){ // coor c'est une 
 
 int fermerGrille(int G[9][9], Cand C[9][9], Case O[81], int *NBO)
 {
-    int fin, i, k, f, nb,tamp; //dif permet de savoir si la grille est finie
+    int fin, i, k, f, nb,ga; //dif permet de savoir si la grille est finie
     Case coor;
     fin=0;
     while(fin==0)
     {
         f=0;
-        coor=rechCaseUnique(C);
+        coor=rechCaseUnique(C,G,*NBO);
         if(coor.x=!NULL){  
            nb=C[coor.x][coor.y].tab[0];
             fermerCase(G, C, coor, nb);
@@ -345,6 +345,6 @@ int fermerGrille(int G[9][9], Cand C[9][9], Case O[81], int *NBO)
     if(f=!1)    
         fin=1; // si il n'y a pas eu de case remplit, la grille est finie
     }
-    if(NBO>0) return(1); //dit que la grille est difficile
+    if(*NBO>0) return(1); //dit que la grille est difficile
     else return(0); //dit que la grille est facile
 }
