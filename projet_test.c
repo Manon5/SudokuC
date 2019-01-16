@@ -24,7 +24,7 @@ Case O[81];
 Cand C[9][9];
 void lireGrille();
 void ecrireGrille(int[9][9]);
-void initJeu(int[9][9], Cand[9][9] , Case[81],int*);
+int initJeu(int[9][9], Cand[9][9] , Case[81]);
 int quelleZone(int, int); //fonction utilisée dans estVoisine
 int estVoisine(int, int, int, int); //fonction utilisée dans estCand
 int estCand(int, int, int[9][9], int);
@@ -38,10 +38,12 @@ int ecrireCand();//pas oublier le ecrire cand dans fermergrille
 
 int main()
 {
-  int fac, NBO;
+  int fac, NBO, i;
 lireGrille(G);
 ecrireGrille(G);//a completer et faire plus dans les autre fonctions
-initJeu(G,C,O,&NBO);
+NBO=initJeu(G,C,O);
+for(i=0;i<NBO;i++)
+    printf("%d,%d\n",O[i].x, O[i].y);
 fac=fermerGrille(G,C,O,NBO);
 ecrireGrille(G);
 if(fac==1){
@@ -110,7 +112,7 @@ void ecrireGrille(int G[9][9]){
 
 }
 
-void initJeu(int G[9][9], Cand C[9][9], Case O[81],int *NBO)
+int initJeu(int G[9][9], Cand C[9][9], Case O[81])
 {
  //module
  int i, j,w,b,c,r;
@@ -146,7 +148,7 @@ void initJeu(int G[9][9], Cand C[9][9], Case O[81],int *NBO)
      }
     }
   }
- *NBO=w; // Compteur de cases ouvertes
+ return(w); // Compteur de cases ouvertes
 }
 
 int quelleZone(int colonne, int ligne){
