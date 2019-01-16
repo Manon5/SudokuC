@@ -35,12 +35,22 @@ Case rechCaseUnique(Cand[9][9]);
 void suppr(Cand[9][9], int, int, int); //module utilisé dans le module fermerCase
 void fermerCase(int[9][9], Cand[9][9], Case, int);
 int fermerGrille(int[9][9], Cand[9][9], Case[81], int*);
-int ecrireCand();
+int ecrireCand();//pas oublier le ecrire cand dans fermergrille
 
 int main()
 {
-void lireGrille();
-void ecrireGrille();
+  int fac;
+lireGrille(G);
+ecrireGrille();//a completer et faire plus dans les autre fonctions
+initJeu(G,C,&NBO,O);
+fac=fermerGrille(G,C,O,&NBO);
+printf("Voici la grille finale");
+ecrireGrille(G);
+if(fac=1)
+  {printf("La grille étant difficle, voici les condidats possibles pour les cases restantes");
+  ecrireCand(); //ecrire cand a compléter
+  }
+
 }
 
 void lireGrille(int G[9][9]){
@@ -273,7 +283,7 @@ void fermerCase(int G[9][9], Cand C[9][9], Case coor,int nb){ // coor c'est une 
       suppr(C, i, coor.y, nb);  //fonction a faire : supprime la case du nombre dans le tableau et décale vers la droite c'elle après et fait nbc-1
     }
   }
-  for(i=0;i<9;i++){
+  for(i=0;i<9;i++) {
     if(appartient(C, coor.x, i, nb)==1){
       suppr(C, coor.x, i, nb);
     }
@@ -314,10 +324,14 @@ int fermerGrille(int G[9][9], Cand C[9][9], Case O[81], int *NBO)
                     fermerCase(G, C, O[i], j);
                     for(k=i;k<*NBO+1;i++)
                     {
-                        O[k]=O[k+1]; //déplace les élément de O
+                        O[k]=O[k+ 1]; //déplace les élément de O
                     }
                     *NBO--;
                     br=1;
+                    printf("Elimination des candidats uniques...\n la case (%d,%d)est fermee avec le chiffre %d",O[i].x,O[i].y,j);
+                    ecrireGrille(G);
+                    printf("Voici les candidats des %d cases ouvertes de la grille :",*NBO);
+                    //ecrire cand
                     break;
                 }
             }
