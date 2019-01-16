@@ -272,14 +272,15 @@ int fermerGrille(int G[9][9],Cand C[9][9], Case O[81], int NBO)
     Case coor;
     int fin, tampon,nb,i;
     fin=0;
-    while((fin=!1)&&(NBO!=0))
+    do
     {
         coor=rechCaseUnique(C,O,NBO);
-        if(coor.x==NULL)    //teste si il y a une case unique dans coor
+        printf("coordonnées %d,%d",coor.x,coor.y);
+        /*if(coor.x==NULL)    //teste si il y a une case unique dans coor
         {
         fin=1;
-        }
-        else
+        }*/
+        if(coor.x>=0)
         {
             nb=C[coor.x][coor.y].tab[0];  //utile pour le printf plus bas
             fermerCase(G,C,coor);
@@ -295,11 +296,15 @@ int fermerGrille(int G[9][9],Cand C[9][9], Case O[81], int NBO)
             NBO--;
             printf("Elimination des candidats uniques...\n la case (%d,%d)est fermee avec le chiffre %d\n",coor.x,coor.y,nb);
             ecrireGrille(G);
-            printf("Voici les candidats des %d cases ouvertes de la grille :",NBO);
+            printf("Voici les candidats des %d cases ouvertes de la grille :\n",NBO);
             ecrireCand(C);
         }
+        else
+        {
+            fin=1;
+        }
         
-    }
+    }while((fin!=1)&&(NBO!=0));
     if(NBO>0)
     {
         return(1);
