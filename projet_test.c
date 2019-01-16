@@ -261,8 +261,8 @@ void fermerCase(int G[9][9], Cand C[9][9], Case ca){
   int i, j;
   for (i = 0; i < 9; i++) { // on parcourt le tableau
     for (j = 0; j < 9; j++) {
-      if(G[i][j] == 0 && estVoisine(ca.x, ca.y, i, j)){ // si la case est voisine et ouverte
-        suppr(C, ca.x, ca.y, C[ca.x][ca.y].tab[0]); // on supprime le candidat de la liste
+      if(G[i][j] == 0 && estVoisine(ca.y, ca.x, j, i)){ // si la case est voisine et ouverte
+        suppr(C, i, j, C[ca.x][ca.y].tab[0]); // on supprime le candidat de la liste
       }
     }
   }
@@ -275,7 +275,6 @@ int fermerGrille(int G[9][9],Cand C[9][9], Case O[81], int NBO)
     do
     {
         coor=rechCaseUnique(C,O,NBO);
-        printf("coordonnées %d,%d",coor.x,coor.y);
         /*if(coor.x==NULL)    //teste si il y a une case unique dans coor
         {
         fin=1;
@@ -296,8 +295,8 @@ int fermerGrille(int G[9][9],Cand C[9][9], Case O[81], int NBO)
             NBO--;
             printf("Elimination des candidats uniques...\n la case (%d,%d)est fermee avec le chiffre %d\n",coor.x,coor.y,nb);
             ecrireGrille(G);
-            printf("Voici les candidats des %d cases ouvertes de la grille :\n",NBO);
-            ecrireCand(C);
+            //printf("Voici les candidats des %d cases ouvertes de la grille :\n",NBO);
+           // ecrireCand(C);
         }
         else
         {
