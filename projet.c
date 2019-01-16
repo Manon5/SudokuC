@@ -41,7 +41,7 @@ int main()
 {
   int fac;
 lireGrille(G);
-ecrireGrille();//a completer et faire plus dans les autre fonctions
+ecrireGrille(G);//a completer et faire plus dans les autre fonctions
 initJeu(G,C,&NBO,O);
 fac=fermerGrille(G,C,O,&NBO);
 printf("Voici la grille finale");
