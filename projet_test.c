@@ -29,10 +29,10 @@ int quelleZone(int, int); //fonction utilisée dans estVoisine
 int estVoisine(int, int, int, int); //fonction utilisée dans estCand
 int estCand(int, int, int[9][9], int);
 int appartient(Cand[9][9], int, int, int);
-int estCandUnique(Cand[9][9], Case[CA], int);
+int estCandUnique(Cand[9][9], Case, int);
 Case rechCaseUnique(Cand[9][9],Case[81], int);
 void suppr(Cand[9][9], int, int, int); //module utilisé dans le module fermerCase
-void fermerCase(int[9][9], Cand[9][9], Case, int);
+void fermerCase(int[9][9], Cand[9][9], Case);
 int fermerGrille(int[9][9], Cand[9][9], Case[81], int);
 void ecrireCand(Cand[9][9]);//pas oublier le ecrire cand dans fermergrille
 
@@ -255,14 +255,14 @@ Case rechCaseUnique(Cand C[9][9],Case O[81],int NBO){
 
 void fermerCase(int G[9][9], Cand C[9][9], Case ca){ 
   // On ferme la case
-  G[ca.x, ca.y] = C[ca.x, ca.y].tab[0];
+  G[ca.x][ca.y] = C[ca.x][ca.y].tab[0];
 
   // On retire le candidat des cases voisines
   int i, j;
   for (i = 0; i < 9; i++) { // on parcourt le tableau
     for (j = 0; j < 9; j++) {
       if(C[i, j] == 0 && estVoisine(ca.x, ca.y, i, j)){ // si la case est voisine et ouverte
-        suppr(C, ca.x, ca.y, C[ca.x, ca.y].tab[0]); // on supprime le candidat de la liste
+        suppr(C, ca.x, ca.y, C[ca.x][ca.y].tab[0]); // on supprime le candidat de la liste
       }
     }
   }
