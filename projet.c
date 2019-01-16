@@ -14,7 +14,7 @@ int y; // no de colonne
 
 typedef struct {
 int nbc; // no de candidats
-int * tab; // table candidats
+int tab[9]; // table candidats
 } Cand;
 
 //initialisation des fonctions, variables et tableaux
@@ -22,14 +22,13 @@ int tab[9];
 int G[TAILLE][TAILLE];
 Case O[81];
 Cand C[9][9];
-int NBO;
 void lireGrille();
 void ecrireGrille(int[9][9]);
-void initJeu(int[9][9], Cand[9][9] , int*, Case[81]);
+int initJeu(int[9][9], Cand[9][9] , Case[81]);
 int quelleZone(int, int); //fonction utilisée dans estVoisine
 int estVoisine(int, int, int, int); //fonction utilisée dans estCand
 int estCand(int, int, int[9][9], int);
-int appartient(Cand[9][9], int, int, int);
+int appartient(Cand[9][9], int, int, int);;
 int estCandUnique(Cand[9][9], int, int, int);
 Case rechCaseUnique(Cand[9][9]);
 void suppr(Cand[9][9], int, int, int); //module utilisé dans le module fermerCase
@@ -39,17 +38,19 @@ int ecrireCand();//pas oublier le ecrire cand dans fermergrille
 
 int main()
 {
-  int fac;
+  int fac, NBO;
+  NBO=90;
 lireGrille(G);
 ecrireGrille(G);//a completer et faire plus dans les autre fonctions
-initJeu(G,C,&NBO,O);
+NBO=initJeu(G,C,O);
 fac=fermerGrille(G,C,O,&NBO);
-printf("Voici la grille finale");
+printf("Voici la grille finale\n");
 ecrireGrille(G);
-if(fac=1)
-  {printf("La grille étant difficle, voici les condidats possibles pour les cases restantes");
-  ecrireCand(); //ecrire cand a compléter
-  }
+if(fac=1){
+printf("La grille étant difficle, voici les condidats possibles pour les cases restantes\n");
+  //ecrireCand(); //ecrire cand a compléter
+}
+
 
 }
 
@@ -81,7 +82,7 @@ void lireGrille(int G[9][9]){
     else{
         // Erreur dans le cas où le fichier n'existe pas
 
-        printf("Impossible d'ouvrir le fichier\n");
+        printf("Impossible d ouvrir le fichier\n");
     }
 
 
@@ -111,24 +112,26 @@ void ecrireGrille(int G[9][9]){
 
 }
 
-void initJeu(int G[9][9], Cand C[9][9], int *NBO, Case O[81])
+int initJeu(int G[9][9], Cand C[9][9], Case O[81])
 {
  //module
- int i, j,a,b,c;
-
- a=0;
+ int i, j,w,b,c,r;
+c=90;
+ w=90;
+ w=0;
   for(i=0;i<9;i++)
   {
     for(j=0;j<9;j++)
     {
-      if(G[i][j]=0)   //détermine si la case est ouverte ou fermee
+      C[i][j].nbc=0;
+      if(G[i][j]==0)   //détermine si la case est ouverte ou fermee
       {
        // On remplit la table O (case ouverte/fermee)
        c=0;
-       O[c].x=i; // O est de type case, si la cas est ouverte, O enregistre les coordonnée de la case
-       O[c].y=j;
-       a++;
-       for(b=1;b<10;b++)
+       O[w].x=i; // O est de type case, si la cas est ouverte, O enregistre les coordonnée de la case
+       O[w].y=j;
+      w++;
+      for(b=1;b<10;b++)
        {
         if(estCand(j,i,G,b)==1) //determine si b est un nombre candidat
         {
@@ -136,17 +139,18 @@ void initJeu(int G[9][9], Cand C[9][9], int *NBO, Case O[81])
          C[i][j].nbc++;
          C[i][j].tab[c]=b;
          c++;
-        }
        }
+        }
       }
       else
       {
-       C[i][j].nbc=0;
-       C[i][j].tab=NULL;
-      }
+        for(r=0;r<9;r++)
+       C[i][j].tab[r]=NULL ;
+     }
     }
   }
- *NBO=a; // Compteur de cases ouvertes
+  printf("w = %d\n", w);
+ return w; // Compteur de cases ouvertes
 }
 
 int quelleZone(int colonne, int ligne){
@@ -274,10 +278,11 @@ void suppr(Cand C[9][9], int x, int y, int nb ){
 }
 
 void fermerCase(int G[9][9], Cand C[9][9], Case coor,int nb){ // coor c'est une case du tableau de O
-  int i, part, j;
+  int i, part, j,r;
   G[coor.x][coor.y]=nb;
   C[coor.x][coor.y].nbc=0;
-  C[coor.x][coor.y].tab=NULL;
+  for(r=0;r<9;r++)
+  C[coor.x][coor.y].tab[r]=NULL;
   for(i=0;i<9;i++){
     if(appartient(C, i, coor.y, nb)==1){
       suppr(C, i, coor.y, nb);  //fonction a faire : supprime la case du nombre dans le tableau et décale vers la droite c'elle après et fait nbc-1
@@ -311,33 +316,28 @@ void fermerCase(int G[9][9], Cand C[9][9], Case coor,int nb){ // coor c'est une 
 int fermerGrille(int G[9][9], Cand C[9][9], Case O[81], int *NBO)
 {
     int fin, i, j, k, br; //dif permet de savoir si la grille est finie
+    Case coor;
     fin=0;
     while(fin==0)
     {
-        br=0;  //permet de savoir si il faut revenir au while
-        for(i=0;i<*NBO;i++)
-        {
-            for(j=1;j<10;j++)  //test pour chaque cas possible
-            {
-                if (estCandUnique(C, O[i].x, O[i].y, j)==1)
-                {
-                    fermerCase(G, C, O[i], j);
-                    for(k=i;k<*NBO+1;i++)
+        coor=rechCaseUnique(C);
+            
+        fermerCase(G, C, coor, C[coor.x][coor.y].tab[0]);
+                    //a completer
+        for(k=i;k<*NBO;k++)
                     {
-                        O[k]=O[k+ 1]; //déplace les élément de O
+        O[k]=O[k+ 1]; //déplace les élément de O
                     }
-                    *NBO--;
-                    br=1;
-                    printf("Elimination des candidats uniques...\n la case (%d,%d)est fermee avec le chiffre %d",O[i].x,O[i].y,j);
-                    ecrireGrille(G);
-                    printf("Voici les candidats des %d cases ouvertes de la grille :",*NBO);
-                    //ecrire cand
-                    break;
+        *NBO--;
+        br=1;
+        printf("Elimination des candidats uniques...\n la case (%d,%d)est fermee avec le chiffre %d\n",O[i].x,O[i].y,j);
+        ecrireGrille(G);
+        printf("Voici les candidats des %d cases ouvertes de la grille :",*NBO);
+        //ecrire cand
                 }
-            }
-            if(br==1) break;
-        }
-    if(br==0) fin=1; // si il n'y a pas eu de case remplit, la grille est finie
+
+        
+ fin=1; // si il n'y a pas eu de case remplit, la grille est finie
     }
     if(NBO>0) return(1); //dit que la grille est difficile
     else return(0); //dit que la grille est facile
