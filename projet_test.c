@@ -30,7 +30,7 @@ int estVoisine(int, int, int, int); //fonction utilisée dans estCand
 int estCand(int, int, int[9][9], int);
 int appartient(Cand[9][9], int, int, int);;
 int estCandUnique(Cand[9][9], int, int, int);
-Case rechCaseUnique(Cand[9][9],Case[81], int*);
+Case rechCaseUnique(Cand[9][9],Case[81], int);
 void suppr(Cand[9][9], int, int, int); //module utilisé dans le module fermerCase
 void fermerCase(int[9][9], Cand[9][9], Case, int);
 int fermerGrille(int[9][9], Cand[9][9], Case[81], int*);
@@ -43,7 +43,7 @@ lireGrille(G);
 ecrireGrille(G);//a completer et faire plus dans les autre fonctions
 initJeu(G,C,O,&NBO);
 fac=fermerGrille(G,C,O,&NBO);
-printf("Voici la grille finale\n",NBO);
+printf("Voici la grille finale\n");
 ecrireGrille(G);
 if(fac==1){
 printf("La grille étant difficle, voici les condidats possibles pour les cases restantes\n");
