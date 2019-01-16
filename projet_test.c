@@ -345,7 +345,7 @@ void ecrireCand(Cand C[9][9])
                 {
                     printf("-");
                 }
-                printf("*");
+                printf("*\n");
             }   
         }
         printf("*");
@@ -365,6 +365,10 @@ void ecrireCand(Cand C[9][9])
             if(k%3==2)
             {
                 printf("*");
+                if(k%8==8)
+                  {
+                  printf("\n");
+                  }
             }
             else
             {
