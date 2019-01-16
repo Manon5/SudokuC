@@ -2,7 +2,6 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include "types.h"
 
 //définition de la taille des grilles (9x9)
 #define TAILLE 9
@@ -19,23 +18,23 @@ int * tab; // table candidats
 } Cand;
 
 //initialisation des fonctions, variables et tableaux
-int tab[9]
+int tab[9];
 int G[TAILLE][TAILLE];
 Case O[81];
 Cand C[9][9];
 int NBO;
 void lireGrille();
-void ecrireGrille();
-void initJeu(int*);
+void ecrireGrille(int[9][9]);
+void initJeu(int[9][9], Cand[9][9] , int*, Case[81]);
 int quelleZone(int, int); //fonction utilisée dans estVoisine
-int estVoisine(int, int, int, int, int); //fonction utilisée dans estCand 
-int estCand(int, int, int, int);
-int appartient(Cand, int, int, int);
-int estCandUnique(Cand, int, int, int);
-Case rechCaseUnique(Cand);
-void suppr(Cand, int, int, int); //module utilisé dans le module fermerCase
-void fermerCase(int, Cand, Case, int);
-void fermerGrille(int, Cand, Case, int*);
+int estVoisine(int, int, int, int); //fonction utilisée dans estCand
+int estCand(int, int, int[9][9], int);
+int appartient(Cand[9][9], int, int, int);
+int estCandUnique(Cand[9][9], int, int, int);
+Case rechCaseUnique(Cand[9][9]);
+void suppr(Cand[9][9], int, int, int); //module utilisé dans le module fermerCase
+void fermerCase(int[9][9], Cand[9][9], Case, int);
+int fermerGrille(int[9][9], Cand[9][9], Case[81], int*);
 int ecrireCand();
 
 int main()
@@ -95,7 +94,7 @@ void ecrireGrille(int G[9][9]){
     printf("|\n");
     if(i == 2 || i == 5){
        printf("|-------|-------|-------|\n");
-    }
+    }TAILLE;
   }
 
    printf("-------------------------\n");
@@ -106,7 +105,7 @@ void initJeu(int G[9][9], Cand C[9][9], int *NBO, Case O[81])
 {
  //module
  int i, j,a,b,c;
- 
+
  a=0;
   for(i=0;i<9;i++)
   {
@@ -121,11 +120,11 @@ void initJeu(int G[9][9], Cand C[9][9], int *NBO, Case O[81])
        a++;
        for(b=1;b<10;b++)
        {
-        if(estCand(j,i,G[][],b)=1) //determine si b est un nombre candidat
+        if(estCand(j,i,G,b)==1) //determine si b est un nombre candidat
         {
          // On remplit la table C (liste des candidats)
          C[i][j].nbc++;
-         C[i][j].*tab[c]=b;
+         C[i][j].tab[c]=b;
          c++;
         }
        }
@@ -134,7 +133,7 @@ void initJeu(int G[9][9], Cand C[9][9], int *NBO, Case O[81])
       {
        C[i][j].nbc=0;
        C[i][j].tab=NULL;
-      } 
+      }
     }
   }
  *NBO=a; // Compteur de cases ouvertes
@@ -209,10 +208,9 @@ int estCand(int col, int lig, int G[9][9], int nb){
     }
   }
   return res;
-
 }
 
-int appartient(Cand C[][], int x, int y, int nb){
+int appartient(Cand C[9][9], int x, int y, int nb){
   int i;
   for(i=0;i<C[x][y].nbc;i++){
     if(nb=C[x][y].tab[i])
@@ -221,14 +219,14 @@ int appartient(Cand C[][], int x, int y, int nb){
   return(0);
 }
 
-int estCandUnique(Cand C[][9], int x, int y, int nb){
+int estCandUnique(Cand C[9][9], int x, int y, int nb){
     if((C[x][y].nbc=!1)||(C[x][y].tab[0]=!nb))
     return(0);
     return(1);
 }
 
 // a changer en utilisant O
-Case rechCaseUnique(Cand C[][9]){
+Case rechCaseUnique(Cand C[9][9]){
   Case coor;
   int i, j, n;
   coor.x=NULL;
@@ -237,7 +235,7 @@ Case rechCaseUnique(Cand C[][9]){
     for(j=0;j<9;j++){
       if (C[i][j].nbc==1){
         for(n=1;n<10;n++){
-          if(estCandUnique(C[9][9],i,j,n)==1){
+          if(estCandUnique(C,i,j,n)==1){
             coor.x=i;
             coor.y=j;
             return(coor);
@@ -265,19 +263,19 @@ void suppr(Cand C[9][9], int x, int y, int nb ){
   C[x][y].nbc--;
 }
 
-void fermerCase(int G[9][9], Cand C[9][9], Case coor,int nb){ // coor c'est une case du tableau de O 
+void fermerCase(int G[9][9], Cand C[9][9], Case coor,int nb){ // coor c'est une case du tableau de O
   int i, part, j;
   G[coor.x][coor.y]=nb;
   C[coor.x][coor.y].nbc=0;
   C[coor.x][coor.y].tab=NULL;
   for(i=0;i<9;i++){
-    if(appartient(C[9][9], i, coor.y, nb)==1){
-      suppr(C[9][9], i, coor.y, nb);  //fonction a faire : supprime la case du nombre dans le tableau et décale vers la droite c'elle après et fait nbc-1
+    if(appartient(C, i, coor.y, nb)==1){
+      suppr(C, i, coor.y, nb);  //fonction a faire : supprime la case du nombre dans le tableau et décale vers la droite c'elle après et fait nbc-1
     }
   }
   for(i=0;i<9;i++){
-    if(appartient(C[9][9], coor.x, i, nb)==1){
-      suppr(C[9][9], coor.x, i, nb);
+    if(appartient(C, coor.x, i, nb)==1){
+      suppr(C, coor.x, i, nb);
     }
   }
   part=quelleZone(coor.y, coor.x);
@@ -293,8 +291,8 @@ void fermerCase(int G[9][9], Cand C[9][9], Case coor,int nb){ // coor c'est une 
   }
   for (i=0;i<3;i++){
     for(j=0;j<3;j++){
-      if(appartient(C[9][9], coor.x + i, coor.y + j, nb)==1){
-        suppr(C[9][9], coor.x + i, coor.y + j, nb);
+      if(appartient(C, coor.x + i, coor.y + j, nb)==1){
+        suppr(C, coor.x + i, coor.y + j, nb);
       }
     }
   }
@@ -311,12 +309,12 @@ int fermerGrille(int G[9][9], Cand C[9][9], Case O[81], int *NBO)
         {
             for(j=1;j<10;j++)  //test pour chaque cas possible
             {
-                if (estCandUnique(C[9][9], O[i].x, O[i].y, j)==1)
+                if (estCandUnique(C, O[i].x, O[i].y, j)==1)
                 {
-                    fermerCase(G[9][9], C[9][9], O[i], j);
+                    fermerCase(G, C, O[i], j);
                     for(k=i;k<*NBO+1;i++)
                     {
-                        O[k]=O[k+1]; //déplace les élément de O 
+                        O[k]=O[k+1]; //déplace les élément de O
                     }
                     *NBO--;
                     br=1;
@@ -326,9 +324,8 @@ int fermerGrille(int G[9][9], Cand C[9][9], Case O[81], int *NBO)
             if(br==1) break;
         }
     if(br==0) fin=1; // si il n'y a pas eu de case remplit, la grille est finie
-    }   
+    }
     if(NBO>0) return(1); //dit que la grille est difficile
     else return(0); //dit que la grille est facile
-    
-}
 
+}
