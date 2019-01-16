@@ -243,7 +243,7 @@ Case rechCaseUnique(Cand C[9][9],Case O[81],int NBO){
   coor.y=NULL;
   for(i=0;i<NBO;i++)
     {
-    if(C[O[i].x][O[i].y].nbc+1==1)
+    if(C[O[i].x][O[i].y].nbc==1)
         {
         for(n=1;n<10;n++){
           if(estCandUnique(C,O[i].x,O[i].y,n)==1){
