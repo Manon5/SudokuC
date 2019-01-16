@@ -347,7 +347,7 @@ void ecrireCand(Cand C[9][9])
                 printf("*");
             }   
         }
-        printf("*");
+        printf("*\n");
         for(k=0;k<9;k++)
         {
             printf(" ");
@@ -364,6 +364,10 @@ void ecrireCand(Cand C[9][9])
             if(k%3==2)
             {
                 printf("*");
+                if(k%9==8)
+                {
+                    printf("\n");   
+                }
             }
             else
             {
