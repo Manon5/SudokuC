@@ -45,7 +45,7 @@ initJeu(G,C,O,&NBO);
 fac=fermerGrille(G,C,O,&NBO);
 printf("Voici la grille finale\n");
 ecrireGrille(G);
-if(fac=1){
+if(fac==1){
 printf("La grille étant difficle, voici les condidats possibles pour les cases restantes\n");
   //ecrireCand(); //ecrire cand a compléter
 }
