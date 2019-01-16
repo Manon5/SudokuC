@@ -240,7 +240,6 @@ Case rechCaseUnique(Cand C[9][9],Case O[81],int NBO){
   int i, k;
   res.x= NULL;
   res.y= NULL;
-  printf("NBO = %d\n", NBO); 
   for(i=0;i<NBO;i++){
     if(C[O[i].x][O[i].y].nbc==1){  
         for(k=1;k<10;k++){
@@ -273,7 +272,7 @@ int fermerGrille(int G[9][9],Cand C[9][9], Case O[81], int NBO)
     Case coor;
     int fin, tampon,nb,i;
     fin=0;
-    while((fin=!1)||(NBO!=0))
+    while((fin=!1)&&(NBO!=0))
     {
         coor=rechCaseUnique(C,O,NBO);
         if(coor.x==NULL)    //teste si il y a une case unique dans coor
@@ -345,7 +344,7 @@ void ecrireCand(Cand C[9][9])
                 {
                     printf("-");
                 }
-                printf("*\n");
+                printf("*");
             }   
         }
         printf("*");
@@ -365,10 +364,6 @@ void ecrireCand(Cand C[9][9])
             if(k%3==2)
             {
                 printf("*");
-                if(k%8==8)
-                  {
-                  printf("\n");
-                  }
             }
             else
             {
