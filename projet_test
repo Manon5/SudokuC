@@ -24,7 +24,7 @@ Case O[81];
 Cand C[9][9];
 void lireGrille();
 void ecrireGrille(int[9][9]);
-int initJeu(int[9][9], Cand[9][9] , Case[81]);
+void initJeu(int[9][9], Cand[9][9] , Case[81],int*);
 int quelleZone(int, int); //fonction utilisée dans estVoisine
 int estVoisine(int, int, int, int); //fonction utilisée dans estCand
 int estCand(int, int, int[9][9], int);
@@ -41,7 +41,7 @@ int main()
   int fac, NBO;
 lireGrille(G);
 ecrireGrille(G);//a completer et faire plus dans les autre fonctions
-NBO=initJeu(G,C,O);
+initJeu(G,C,O,&NBO);
 fac=fermerGrille(G,C,O,&NBO);
 printf("Voici la grille finale\n");
 ecrireGrille(G);
@@ -111,11 +111,13 @@ void ecrireGrille(int G[9][9]){
 
 }
 
-int initJeu(int G[9][9], Cand C[9][9], Case O[81])
+void initJeu(int G[9][9], Cand C[9][9], Case O[81],int *NBO)
 {
  //module
  int i, j,w,b,c,r;
  w=0;
+ O=calloc(81, sizeof(Case));
+ C=calloc(81, sizeof(Cand));
   for(i=0;i<9;i++)
   {
     for(j=0;j<9;j++)
@@ -147,7 +149,7 @@ int initJeu(int G[9][9], Cand C[9][9], Case O[81])
     }
   }
   printf("w = %d\n", w);
- return w; // Compteur de cases ouvertes
+ *NBO=w; // Compteur de cases ouvertes
 }
 
 int quelleZone(int colonne, int ligne){
@@ -312,7 +314,7 @@ void fermerCase(int G[9][9], Cand C[9][9], Case coor,int nb){ // coor c'est une 
 
 int fermerGrille(int G[9][9], Cand C[9][9], Case O[81], int *NBO)
 {
-    int fin, i, k, f, nb; //dif permet de savoir si la grille est finie
+    int fin, i, k, f, nb,tamp; //dif permet de savoir si la grille est finie
     Case coor;
     fin=0;
     while(fin==0)
@@ -320,22 +322,24 @@ int fermerGrille(int G[9][9], Cand C[9][9], Case O[81], int *NBO)
         f=0;
         coor=rechCaseUnique(C);
         if(coor.x=!NULL){  
-            nb=C[coor.x][coor.y].tab[0];
-            fermerCase(G, C, coor, C[coor.x][coor.y].tab[0]);
-            for(i=0;i<*NBO+1;i++){
-                if((coor.x==O[i].x)&&(coor.y==O[i].y)){
+           nb=C[coor.x][coor.y].tab[0];
+            fermerCase(G, C, coor, nb);
+            for(i=0;i<=*NBO;i++)
+            {
+                if((coor.x==O[i].x)&&(coor.y==O[i].y))
+                {
                     break;
                 }
-            for(k=i;k<*NBO;k++)
-                {
-                O[k]=O[k+ 1]; //déplace les élément de O
-                }
+            }
+            for(k=i;k<*NBO-1;k++)
+            {
+                O[k]=O[k+1]; //déplace les élément de O
+            }
             *NBO--;
             printf("Elimination des candidats uniques...\n la case (%d,%d)est fermee avec le chiffre %d\n",O[i].x,O[i].y,nb);
             ecrireGrille(G);
             printf("Voici les candidats des %d cases ouvertes de la grille :",*NBO);
             //ecrire cand
-                }
             f=1;
         }
     if(f=!1)    
