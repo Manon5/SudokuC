@@ -42,8 +42,6 @@ int main()
 lireGrille(G);
 ecrireGrille(G);//a completer et faire plus dans les autre fonctions
 initJeu(G,C,O,&NBO);
-for(i=0;i<NBO;i++)
-    printf("%d,%d\n",O[i].x,O[i].y);
 fac=fermerGrille(G,C,O,&NBO);
 printf("Voici la grille finale\n",NBO);
 ecrireGrille(G);
@@ -238,12 +236,12 @@ int estCandUnique(Cand C[9][9], int x, int y, int nb){
     else return(1);
 }
 
-Case rechCaseUnique(Cand C[9][9],Case O[81],int *NBO){
+Case rechCaseUnique(Cand C[9][9],Case O[81],int NBO){
   Case coor;
   int i, n;
   coor.x=NULL;
   coor.y=NULL;
-  for(i=0;i<*NBO;i++)
+  for(i=0;i<NBO;i++)
     {
     if(C[O[i].x][O[i].y].nbc+1==1)
         {
