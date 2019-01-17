@@ -185,7 +185,7 @@ void ecrireCand() {
 int estCandUnique(int x, int y) {
       
   if (C[x][y].nbc == 1) {
-printf("DBX: estCandUnique %d,%d :: %d\n", x, y, C[x][y].tab[0]);
+printf("Elimination des candidats uniques :\n la case (%d,%d) est fermee avec le chiffre %d\n", x, y, C[x][y].tab[0]);
     return(1);
   }
   return(0);
@@ -300,12 +300,12 @@ int main() {
      fermerGrille();
       
      if (NBO > 0) {
-       printf("La grille étant difficle, voici les condidats possibles pour les cases restantes\n");
+       printf("La grille étant difficle, voici les candidats possibles pour les cases restantes\n");
         ecrireCand();
-     } else {
+     }
        printf("Voici la grille finale\n");
        ecrireGrille();
-     }
+     
    }
 }
 
