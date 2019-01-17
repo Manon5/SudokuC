@@ -84,13 +84,12 @@ void ecrireGrille(){
 //--------------------------------------------------
 int estCand(int nb, int x, int y) {
     
-//printf("Candidat  %d,%d pour valeur %d: ", x,y, nb);
 
   // test sur les X
   int i;
   for (i=0; i < TAILLE_SUDOKU; i++) {
     if (G[i][y] == nb ) {
-//printf(" => found on X at %d,%d\n", i, y);
+
         
       return(0);
     }
@@ -99,7 +98,6 @@ int estCand(int nb, int x, int y) {
   int j;
   for (j=0; j < TAILLE_SUDOKU; j++) {
     if (G[x][j] == nb) {
-//printf(" => found on Y at %d,%d\n", x, j);
       return(0);
     }
   }
@@ -110,12 +108,10 @@ int estCand(int nb, int x, int y) {
   for (i=0; i < ARETE; i++) {
     for (j=0; j < ARETE; j++) {
       if (G[I+i][J+j] == nb) {
-//printf(" => found in area %d,%d\n", I, J);
         return(0);
       }
     }
   }
-//printf(" => %d is CANDIDAT\n", nb);
 
   return(1);
 }
@@ -234,17 +230,15 @@ void nettoyerCases(int nb, int x, int y) {
   // purge sur les X
   int i;
   for (i=0; i < TAILLE_SUDOKU; i++) {
-    if (appartient(nb, i, y)) {
- printf("DBX: cleaning X ::: %d, %d :: %d\n", i, y, nb);
-       supprimer(nb, i, y);
+    if (appartient(nb, i, y)) {  
+       supprimer(nb, i, y); //nettoye les y
     }
   }
   // purge sur les Y
   int j;
   for (j=0; j < TAILLE_SUDOKU; j++) {
     if (appartient(nb, x, j)) {
- printf("DBX: cleaning Y ::: %d, %d :: %d\n", x, j, nb);
-       supprimer(nb, x, j);
+       supprimer(nb, x, j); //nettoye les x
     }
   }
   
@@ -254,8 +248,7 @@ void nettoyerCases(int nb, int x, int y) {
   for (i=0; i < ARETE; i++) {
     for (j=0; j < ARETE; j++) {
       if (appartient(nb,I+i, J+j)) { 
- printf("DBX: cleaning Zone ::: %d, %d :: %d\n", I+i, J+j, nb);
-        supprimer(nb, I+i, J+j);
+        supprimer(nb, I+i, J+j); //nettoye la zone
       }
     }
   }
