@@ -42,14 +42,14 @@ int lireGrille(char* nomFichier){
     fichier = fopen(nomFichier, "r");
     int continuer = 1;
 
-    if (fichier != NULL) {
+    if (fichier != NULL) { // le fichier existe
         int i, j, valeur;
         char ligne[TAILLE_LIGNE];
         while (fgets(ligne, TAILLE_LIGNE, fichier) != NULL){
           sscanf(ligne, "%d %d %d", &i, &j, &valeur);
           G[i][j] = valeur;
         }
-    } else {
+    } else { // si le fichier n'existe pas
          printf("Impossible d ouvrir le fichier %s\n", nomFichier);
          continuer = 0;
     }
@@ -58,7 +58,8 @@ int lireGrille(char* nomFichier){
 }
 
 //--------------------------------------------------
-void ecrireGrille(){
+
+void ecrireGrille(){ // Affiche la grille de sudoku
 
   printf("-------------------------\n");
 
@@ -82,7 +83,8 @@ void ecrireGrille(){
 }
 
 //--------------------------------------------------
-int estCand(int nb, int x, int y) {
+
+int estCand(int nb, int x, int y) { // utilise dans initJeu, indique si nb est candidat de la case
     
 
   // test sur les X
@@ -117,7 +119,8 @@ int estCand(int nb, int x, int y) {
 }
 
 //--------------------------------------------------
-int initJeu() {
+
+int initJeu() { // initialise C, O et NBO
 
   int NbrCasesOuvertes=0;
   
@@ -148,7 +151,8 @@ int initJeu() {
 }
 
 //--------------------------------------------------
-void ecrireCand() {
+
+void ecrireCand() { // affiche la table candidats
     
   printf("--------------------------------------------------------------------------------------------------------\n");
 
@@ -182,7 +186,8 @@ void ecrireCand() {
 }
 
 //--------------------------------------------------
-int estCandUnique(int x, int y) {
+
+int estCandUnique(int x, int y) { // indique si la case a un candidat unique
       
   if (C[x][y].nbc == 1) {
 printf("Elimination des candidats uniques :\n la case (%d,%d) est fermee avec le chiffre %d\n", x, y, C[x][y].tab[0]);
@@ -192,7 +197,8 @@ printf("Elimination des candidats uniques :\n la case (%d,%d) est fermee avec le
 }
 
 //--------------------------------------------------
-int rechCaseUnique() {
+
+int rechCaseUnique() { // recherche case ouverte avec un seul candidat
    int c;
    for(c=0; c < NBO; c++) {
       if (estCandUnique(O[c].x,O[c].y)) {
@@ -203,7 +209,8 @@ int rechCaseUnique() {
 }
 
 //--------------------------------------------------
-int appartient(int nb, int x, int y) {
+
+int appartient(int nb, int x, int y) { // indique si nb appartient aux candidats de la case
   int i;
   for (i=0; i < C[x][y].nbc; i++) {
     if (nb == C[x][y].tab[i]) {
@@ -214,7 +221,8 @@ int appartient(int nb, int x, int y) {
 }
 
 //--------------------------------------------------
-void supprimer(int nb, int x, int y) {
+
+void supprimer(int nb, int x, int y) { // supprime un candidat de la table
   int i;
   for (i=0; i < C[x][y].nbc; i++) {
     if (nb == C[x][y].tab[i]) {
@@ -225,7 +233,7 @@ void supprimer(int nb, int x, int y) {
 }
 
 //--------------------------------------------------
-void nettoyerCases(int nb, int x, int y) {
+void nettoyerCases(int nb, int x, int y) { // remet le tableau des candidats a null
     
   // purge sur les X
   int i;
@@ -254,7 +262,7 @@ void nettoyerCases(int nb, int x, int y) {
   }
 }
 //--------------------------------------------------
-void fermerCase(int idx) {
+void fermerCase(int idx) { // ferme la case et retire le chiffre des candidats des cases voisines
    
    int val=C[O[idx].x][O[idx].y].tab[0];
    
@@ -270,7 +278,8 @@ void fermerCase(int idx) {
 }
 
 //--------------------------------------------------
-void fermerGrille() {
+
+void fermerGrille() { // resoudre la grille
     int idx;
 
     idx=rechCaseUnique();
@@ -287,17 +296,18 @@ void fermerGrille() {
 //--------------------------------------------------
 //--------------------------------------------------
 //--------------------------------------------------
+
 int main() {
-   initialiseGrille();
+   initialiseGrille(); // met la grille à 0
 
    if (lireGrille("grille_test.txt")) {
      ecrireGrille();
      
-     NBO=initJeu();
+     NBO=initJeu(); // on initialise C, O, NBO
      
-     ecrireCand();
+     ecrireCand(); // on affiche les candidats
      
-     fermerGrille();
+     fermerGrille(); // resolution de la grille
       
      if (NBO > 0) {
        printf("La grille étant difficle, voici les candidats possibles pour les cases restantes\n");
