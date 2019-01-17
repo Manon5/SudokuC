@@ -210,7 +210,7 @@ int rechCaseUnique() {
 int appartient(int nb, int x, int y) {
   int i;
   for (i=0; i < C[x][y].nbc; i++) {
-    if (nb = C[x][y].tab[i]) {
+    if (nb == C[x][y].tab[i]) {
       return(1);
     }
   }
@@ -222,7 +222,7 @@ void supprimer(int nb, int x, int y) {
   int i;
   for (i=0; i < C[x][y].nbc; i++) {
     if (nb == C[x][y].tab[i]) {
-      C[x][y].tab[i]=C[x][y].tab[C[x][y].nbc];
+      C[x][y].tab[i]=C[x][y].tab[C[x][y].nbc-1];
       C[x][y].nbc--;
     }
   }   
@@ -272,7 +272,7 @@ void fermerCase(int idx) {
    free (C[O[idx].x][O[idx].y].tab);
    C[O[idx].x][O[idx].y].nbc=0;
    
-   O[idx]=O[NBO];
+   O[idx]=O[NBO-1];
    NBO--;
 }
 
@@ -315,4 +315,5 @@ int main() {
      }
    }
 }
+
 
