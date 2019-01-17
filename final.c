@@ -27,15 +27,6 @@ int NBO;
 int G[TAILLE_SUDOKU][TAILLE_SUDOKU];
 
 //--------------------------------------------------
-void initialiseGrille();
-int lireGrille(char*);
-void ecrireGrille();
-int initJeu();
-int estCand(int, int, int);
-int appartient(int, int, int);
-int estCandUnique(int, int);
-
-//--------------------------------------------------
 void initialiseGrille() {   
     int x, y;
     for (x = 0; x < TAILLE_SUDOKU; x++){
@@ -195,6 +186,27 @@ void ecrireCand() {
 }
 
 //--------------------------------------------------
+int estCandUnique(int x, int y) {
+      
+  if (C[x][y].nbc == 1) {
+printf("DBX: estCandUnique %d,%d :: %d\n", x, y, C[x][y].tab[0]);
+    return(1);
+  }
+  return(0);
+}
+
+//--------------------------------------------------
+int rechCaseUnique() {
+   int c;
+   for(c=0; c < NBO; c++) {
+      if (estCandUnique(O[c].x,O[c].y)) {
+         return(c);
+      }
+   }       
+   return(-1);
+}
+
+//--------------------------------------------------
 int appartient(int nb, int x, int y) {
   int i;
   for (i=0; i < C[x][y].nbc; i++) {
@@ -206,37 +218,59 @@ int appartient(int nb, int x, int y) {
 }
 
 //--------------------------------------------------
-int estCandUnique(int x, int y) {
-  
-    
-  if (C[x][y].nbc == 1) {
-    printf("DBX: estCandUnique %d,%d :: %d\n", x, y, C[x][y].tab[0]);
-    return(1);
-  }
-  return(0);
+void supprimer(int nb, int x, int y) {
+  int i;
+  for (i=0; i < C[x][y].nbc; i++) {
+    if (nb == C[x][y].tab[i]) {
+      C[x][y].tab[i]=C[x][y].tab[C[x][y].nbc];
+      C[x][y].nbc--;
+    }
+  }   
 }
 
 //--------------------------------------------------
-int rechCaseUnique() {
-   int c;
-   
-     printf("DBX: rechCaseUnique: NBO %d\n", NBO);
-     
-   for(c=0; c < NBO; c++) {
-//printf("DBX: >>> rechCaseUnique %d\n", c);
-      if (estCandUnique(O[c].x,O[c].y)) {
-         return(c);
+void nettoyerCases(int nb, int x, int y) {
+    
+  // purge sur les X
+  int i;
+  for (i=0; i < TAILLE_SUDOKU; i++) {
+    if (appartient(nb, i, y)) {
+ printf("DBX: cleaning X ::: %d, %d :: %d\n", i, y, nb);
+       supprimer(nb, i, y);
+    }
+  }
+  // purge sur les Y
+  int j;
+  for (j=0; j < TAILLE_SUDOKU; j++) {
+    if (appartient(nb, x, j)) {
+ printf("DBX: cleaning Y ::: %d, %d :: %d\n", x, j, nb);
+       supprimer(nb, x, j);
+    }
+  }
+  
+  // purge la region
+  int I=(x / ARETE) * ARETE;
+  int J=(y / ARETE) * ARETE;
+  for (i=0; i < ARETE; i++) {
+    for (j=0; j < ARETE; j++) {
+      if (appartient(nb,I+i, J+j)) { 
+ printf("DBX: cleaning Zone ::: %d, %d :: %d\n", I+i, J+j, nb);
+        supprimer(nb, I+i, J+j);
       }
-   }       
-   return(-1);
+    }
+  }
 }
-
 //--------------------------------------------------
 void fermerCase(int idx) {
    
    int val=C[O[idx].x][O[idx].y].tab[0];
    
+   nettoyerCases(val, O[idx].x, O[idx].y);
+   
    G[O[idx].x][O[idx].y]=val;
+   
+   free (C[O[idx].x][O[idx].y].tab);
+   C[O[idx].x][O[idx].y].nbc=0;
    
    O[idx]=O[NBO];
    NBO--;
@@ -246,14 +280,12 @@ void fermerCase(int idx) {
 void fermerGrille() {
     int idx;
 
-    printf("DBX: Fermergrilee\n");
-    
     idx=rechCaseUnique();
     while (idx != -1) {
        fermerCase(idx);
        
-       ecrireCand();
        ecrireGrille();
+       ecrireCand();
  
        idx=rechCaseUnique();
     }   
@@ -269,6 +301,9 @@ int main() {
      ecrireGrille();
      
      NBO=initJeu();
+     
+     ecrireCand();
+     
      fermerGrille();
       
      if (NBO > 0) {
@@ -280,5 +315,4 @@ int main() {
      }
    }
 }
-
 
